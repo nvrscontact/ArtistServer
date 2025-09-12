@@ -57,8 +57,8 @@ app.post("/api/stripe", async (req, res) => {
         },
       ],
       customer_creation: 'always',
-      success_url: `http://localhost:3000/Payments?id=${productId}&status=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:3000/Payments?id=${productId}&status=cancel`,
+      success_url: `https://artist-client-m7h7.vercel.app/Payments?id=${productId}&status=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://artist-client-m7h7.vercel.app/Payments?id=${productId}&status=cancel`,
     });
 
     res.json({ url: session.url });
