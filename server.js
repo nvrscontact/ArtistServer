@@ -57,8 +57,8 @@ app.post("/api/stripe", async (req, res) => {
         },
       ],
       customer_creation: 'always',
-      success_url: `https://artistui:vercel.app/Payments?id=${productId}&category=${category}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://artistui:vercel.app/Payments?id=${productId}&category=${category}&method=stripe`,
+      success_url: `https://artistui.vercel.app/Payments?id=${productId}&category=${category}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://artistui.vercel.app/Payments?id=${productId}&category=${category}&method=stripe`,
     });
 
     res.json({ url: session.url });
