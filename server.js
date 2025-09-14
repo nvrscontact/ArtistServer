@@ -32,7 +32,7 @@ const categories = {
 };
 
 
-// Stripe:
+// Stripe Payment:
 
 app.post("/api/stripe", async (req, res) => {
   try {
@@ -57,8 +57,8 @@ app.post("/api/stripe", async (req, res) => {
         },
       ],
       customer_creation: 'always',
-      success_url: `https://artistui.vercel.app/Payments?id=${productId}&status=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://artistui.vercel.app/Payments?id=${productId}&status=cancel`,
+      success_url: `https://artistui:vercel.app/Payments?id=${productId}&category=${category}&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://artistui:vercel.app/Payments?id=${productId}&category=${category}&method=stripe`,
     });
 
     res.json({ url: session.url });
@@ -88,7 +88,10 @@ app.get('/api/session/:id', async (req,res) => {
 });
 
 
-// Paypal Payments:
+
+
+
+// Paypal Payment:
 
 async function generateAccessToken() {
   const response = await axios({
@@ -101,7 +104,6 @@ async function generateAccessToken() {
   return response.data.access_token;
 }
 
-// Crear orden
 app.post("/create-order", async (req, res) => {
   try {
     const {category, productId } = req.body
@@ -136,7 +138,6 @@ app.post("/create-order", async (req, res) => {
   }
 });
 
-// Capturar pago
 app.post("/capture-order", async (req, res) => {
   try {
     const { orderID } = req.body;
